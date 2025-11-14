@@ -10,7 +10,9 @@ public abstract class Fraction {
     }
 
     public static Fraction create(int numerator, int denominator) {
-        if (numerator < denominator) {
+        if (denominator == 0) {
+            throw new IllegalArgumentException("The denominator cannot be zero");
+        } else if (numerator < denominator) {
             return new ProperFraction(numerator, denominator);
         } else {
             return new ImproperFraction(numerator, denominator);
@@ -31,6 +33,10 @@ public abstract class Fraction {
 
     public void setDenominator(int denominator) {
         this.denominator = denominator;
+    }
+
+    public boolean isProper() {
+        return numerator < denominator;
     }
 
     public static class ProperFraction extends Fraction {
