@@ -23,22 +23,39 @@ class FractionTest {
     }
 
     @Test
-    void getNumerator() {
+    void getSetNumerator() {
+        int numerator = 4;
+        int denominator = 5;
+        Fraction fraction = Fraction.create(numerator, denominator);
+
+        assertEquals(numerator, fraction.getNumerator());
+
+        numerator = 3;
+        fraction.setNumerator(numerator);
+
+        assertEquals(numerator, fraction.getNumerator());
     }
 
     @Test
-    void setNumerator() {
-    }
+    void getSetDenominator() {
+        int numerator = 4;
+        int denominator = 5;
+        Fraction fraction = Fraction.create(numerator, denominator);
 
-    @Test
-    void getDenominator() {
-    }
+        assertEquals(denominator, fraction.getDenominator());
 
-    @Test
-    void setDenominator() {
+        denominator = 6;
+        fraction.setDenominator(denominator);
+
+        assertEquals(denominator, fraction.getDenominator());
     }
 
     @Test
     void isProper() {
+        Fraction properFraction = Fraction.create(3, 4);
+        Fraction improperFraction = Fraction.create(4, 3);
+
+        assertTrue(properFraction.isProper());
+        assertFalse(improperFraction.isProper());
     }
 }
