@@ -39,6 +39,28 @@ public abstract class Fraction {
         return numerator < denominator;
     }
 
+    public void simplifying() {
+        int gcd = gcd(numerator, denominator);
+        numerator /= gcd;
+        denominator /= gcd;
+    }
+
+    // Least Common Multiple - Наименьшее общее кратное - НОК
+    public static int lcm(int a, int b) {
+        return Math.abs(a * b) / gcd(a, b);
+    }
+
+    // Greatest Common Divisor - Наибольший общий делитель - НОД
+    public static int gcd(int a, int b) {
+        while (b != 0) {
+            int tmp = b;
+            b = a % b;
+            a = tmp;
+        }
+
+        return a;
+    }
+
     public static class ProperFraction extends Fraction {
 
         private ProperFraction(int numerator, int denominator) {

@@ -58,4 +58,27 @@ class FractionTest {
         assertTrue(properFraction.isProper());
         assertFalse(improperFraction.isProper());
     }
+
+    @Test
+    void gcd() {
+        assertEquals(1, Fraction.gcd(2, 1));
+        assertEquals(5, Fraction.gcd(15, 5));
+        assertEquals(8, Fraction.gcd(56, 128));
+    }
+
+    @Test
+    void lcm() {
+        assertEquals(6, Fraction.lcm(2, 3));
+        assertEquals(15, Fraction.lcm(15, 5));
+        assertEquals(896, Fraction.lcm(56, 128));
+    }
+
+    @Test
+    void simplifying() {
+        Fraction fraction = Fraction.create(25, 45);
+        fraction.simplifying();
+
+        assertEquals(5, fraction.getNumerator());
+        assertEquals(9, fraction.getDenominator());
+    }
 }
