@@ -60,6 +60,16 @@ class FractionTest {
     }
 
     @Test
+    void isEquivalent() {
+        Fraction fraction = Fraction.create(3, 4);
+        Fraction equivalentFraction = Fraction.create(12, 16);
+        Fraction notEquivalentFraction = Fraction.create(4, 3);
+
+        assertTrue(fraction.isEquivalent(equivalentFraction));
+        assertFalse(fraction.isEquivalent(notEquivalentFraction));
+    }
+
+    @Test
     void gcd() {
         assertEquals(1, Fraction.gcd(2, 1));
         assertEquals(5, Fraction.gcd(15, 5));

@@ -39,6 +39,11 @@ public abstract class Fraction {
         return numerator < denominator;
     }
 
+    public boolean isEquivalent(Fraction fraction) {
+        int lcm = lcm(denominator, fraction.denominator);
+        return (numerator * lcm / denominator) == (fraction.numerator * lcm / fraction.denominator);
+    }
+
     public void simplifying() {
         int gcd = gcd(numerator, denominator);
         numerator /= gcd;
