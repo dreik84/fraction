@@ -70,6 +70,18 @@ class FractionTest {
     }
 
     @Test
+    void compareTo() {
+        Fraction lowerFraction = Fraction.create(1, 13);
+        Fraction equivalentLowerFraction = Fraction.create(2, 26);
+        Fraction mediumFraction = Fraction.create(3, 11);
+        Fraction largeFraction = Fraction.create(7, 4);
+
+        assertEquals(0, lowerFraction.compareTo(equivalentLowerFraction));
+        assertTrue(lowerFraction.compareTo(mediumFraction) < 0);
+        assertTrue(largeFraction.compareTo(mediumFraction) > 0);
+    }
+
+    @Test
     void gcd() {
         assertEquals(1, Fraction.gcd(2, 1));
         assertEquals(5, Fraction.gcd(15, 5));

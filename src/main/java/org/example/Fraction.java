@@ -1,6 +1,6 @@
 package org.example;
 
-public abstract class Fraction {
+public abstract class Fraction implements Comparable<Fraction> {
     protected int numerator;
     protected int denominator;
 
@@ -48,6 +48,12 @@ public abstract class Fraction {
         int gcd = gcd(numerator, denominator);
         numerator /= gcd;
         denominator /= gcd;
+    }
+
+    @Override
+    public int compareTo(Fraction fraction) {
+        int lcm = lcm(denominator, fraction.denominator);
+        return (numerator * lcm / denominator) - (fraction.numerator * lcm / fraction.denominator);
     }
 
     // Least Common Multiple - Наименьшее общее кратное - НОК
