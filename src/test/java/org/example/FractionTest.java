@@ -8,7 +8,7 @@ class FractionTest {
 
     @Test
     void create() {
-        Fraction properFraction = Fraction.create(3, 4);
+        Fraction properFraction = Fraction.create(6, 8);
         Fraction improperFraction = Fraction.create(4, 3);
 
         assertEquals(3, properFraction.getNumerator());
@@ -79,6 +79,16 @@ class FractionTest {
         assertEquals(0, lowerFraction.compareTo(equivalentLowerFraction));
         assertTrue(lowerFraction.compareTo(mediumFraction) < 0);
         assertTrue(largeFraction.compareTo(mediumFraction) > 0);
+    }
+
+    @Test
+    void addition() {
+        Fraction addend = Fraction.create(2, 5);
+        Fraction augend = Fraction.create(1, 5);
+        Fraction result = addend.addition(augend);
+
+        assertEquals(3, result.getNumerator());
+        assertEquals(5, result.getDenominator());
     }
 
     @Test

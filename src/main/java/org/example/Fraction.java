@@ -10,13 +10,17 @@ public abstract class Fraction implements Comparable<Fraction> {
     }
 
     public static Fraction create(int numerator, int denominator) {
+        Fraction fraction;
+
         if (denominator == 0) {
             throw new IllegalArgumentException("The denominator cannot be zero");
         } else if (numerator < denominator) {
-            return new ProperFraction(numerator, denominator);
+            fraction = new ProperFraction(numerator, denominator);
         } else {
-            return new ImproperFraction(numerator, denominator);
+            fraction = new ImproperFraction(numerator, denominator);
         }
+
+        return fraction.simplifying();
     }
 
     public int getNumerator() {
@@ -44,16 +48,25 @@ public abstract class Fraction implements Comparable<Fraction> {
         return (numerator * lcm / denominator) == (fraction.numerator * lcm / fraction.denominator);
     }
 
-    public void simplifying() {
+    public Fraction simplifying() {
         int gcd = gcd(numerator, denominator);
         numerator /= gcd;
         denominator /= gcd;
+
+        return this;
     }
 
     @Override
     public int compareTo(Fraction fraction) {
         int lcm = lcm(denominator, fraction.denominator);
         return (numerator * lcm / denominator) - (fraction.numerator * lcm / fraction.denominator);
+    }
+
+    public Fraction addition(Fraction augend) {
+        int resNumerator = numerator * augend.denominator + augend.numerator * denominator;
+        int resDenominator = denominator * augend.denominator;
+
+        return create(resNumerator, resDenominator);
     }
 
     // Least Common Multiple - Наименьшее общее кратное - НОК
