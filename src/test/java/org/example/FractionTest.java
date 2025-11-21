@@ -92,6 +92,16 @@ class FractionTest {
     }
 
     @Test
+    void subtraction() {
+        Fraction minuend = Fraction.create(4, 5);
+        Fraction subtrahend = Fraction.create(1, 5);
+        Fraction result = minuend.subtraction(subtrahend);
+
+        assertEquals(3, result.getNumerator());
+        assertEquals(5, result.getDenominator());
+    }
+
+    @Test
     void gcd() {
         assertEquals(1, Fraction.gcd(2, 1));
         assertEquals(5, Fraction.gcd(15, 5));

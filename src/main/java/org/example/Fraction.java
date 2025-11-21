@@ -40,7 +40,7 @@ public abstract class Fraction implements Comparable<Fraction> {
     }
 
     public boolean isProper() {
-        return numerator < denominator;
+        return Math.abs(numerator) < Math.abs(denominator);
     }
 
     public boolean isEquivalent(Fraction fraction) {
@@ -65,6 +65,13 @@ public abstract class Fraction implements Comparable<Fraction> {
     public Fraction addition(Fraction augend) {
         int resNumerator = numerator * augend.denominator + augend.numerator * denominator;
         int resDenominator = denominator * augend.denominator;
+
+        return create(resNumerator, resDenominator);
+    }
+
+    public Fraction subtraction(Fraction subtrahend) {
+        int resNumerator = numerator * subtrahend.denominator - subtrahend.numerator * denominator;
+        int resDenominator = denominator * subtrahend.denominator;
 
         return create(resNumerator, resDenominator);
     }
