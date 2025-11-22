@@ -102,6 +102,16 @@ class FractionTest {
     }
 
     @Test
+    void multiplication() {
+        Fraction multiplier1 = Fraction.create(2, 5);
+        Fraction multiplier2 = Fraction.create(7, 3);
+        Fraction result = multiplier1.multiplication(multiplier2);
+
+        assertEquals(14, result.getNumerator());
+        assertEquals(15, result.getDenominator());
+    }
+
+    @Test
     void gcd() {
         assertEquals(1, Fraction.gcd(2, 1));
         assertEquals(5, Fraction.gcd(15, 5));

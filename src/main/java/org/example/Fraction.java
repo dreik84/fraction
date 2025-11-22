@@ -76,6 +76,13 @@ public abstract class Fraction implements Comparable<Fraction> {
         return create(resNumerator, resDenominator);
     }
 
+    public Fraction multiplication(Fraction multiplier) {
+        int resNumerator = numerator * multiplier.numerator;
+        int resDenominator = denominator * multiplier.denominator;
+
+        return create(resNumerator, resDenominator);
+    }
+
     // Least Common Multiple - Наименьшее общее кратное - НОК
     public static int lcm(int a, int b) {
         return Math.abs(a * b) / gcd(a, b);
