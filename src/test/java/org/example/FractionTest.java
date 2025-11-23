@@ -112,6 +112,25 @@ class FractionTest {
     }
 
     @Test
+    void division() {
+        Fraction dividend = Fraction.create(2, 3);
+        Fraction divisor = Fraction.create(4, 9);
+        Fraction result = dividend.division(divisor);
+
+        assertEquals(3, result.getNumerator());
+        assertEquals(2, result.getDenominator());
+    }
+
+    @Test
+    void getReciprocal() {
+        Fraction fraction = Fraction.create(2, 5);
+        Fraction reciprocal = fraction.getReciprocal();
+
+        assertEquals(5, reciprocal.getNumerator());
+        assertEquals(2, reciprocal.getDenominator());
+    }
+
+    @Test
     void gcd() {
         assertEquals(1, Fraction.gcd(2, 1));
         assertEquals(5, Fraction.gcd(15, 5));
