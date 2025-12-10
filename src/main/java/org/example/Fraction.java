@@ -1,5 +1,8 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Fraction implements Comparable<Fraction> {
     protected int numerator;
     protected int denominator;
@@ -90,6 +93,24 @@ public abstract class Fraction implements Comparable<Fraction> {
 
     public Fraction getReciprocal() {
         return create(denominator, numerator);
+    }
+
+    public List<Integer> getPrimeDivisorsOfDenominator() {
+        List<Integer> res = new ArrayList<>();
+        int primeDivisor = Prime.getFirst();
+        int den = denominator;
+
+        while (den > 1) {
+            if (den % primeDivisor == 0) {
+                res.add(primeDivisor);
+                den /= primeDivisor;
+                primeDivisor = Prime.getFirst();
+            } else {
+                primeDivisor = Prime.getNext(primeDivisor);
+            }
+        }
+
+        return res;
     }
 
     // Least Common Multiple - Наименьшее общее кратное - НОК

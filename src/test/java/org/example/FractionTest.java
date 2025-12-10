@@ -2,6 +2,8 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class FractionTest {
@@ -151,5 +153,15 @@ class FractionTest {
 
         assertEquals(5, fraction.getNumerator());
         assertEquals(9, fraction.getDenominator());
+    }
+
+    @Test
+    void getPrimeDivisorsOfDenominator() {
+        Fraction fraction = Fraction.create(7, 40);
+
+        List<Integer> expected = List.of(2, 2, 2, 5);
+        List<Integer> actual = fraction.getPrimeDivisorsOfDenominator();
+
+        assertEquals(expected, actual);
     }
 }

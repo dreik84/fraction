@@ -8,5 +8,9 @@ public class FractionApp {
 
         System.out.println(properFraction instanceof Fraction.ProperFraction);
         System.out.println(improperFraction instanceof Fraction.ImproperFraction);
+
+        System.out.println(Prime.getFirst());
+        System.out.println(Prime.getNext(2));
+        System.out.println(Prime.getNext(5));
     }
 }
