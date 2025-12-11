@@ -164,4 +164,27 @@ class FractionTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    void checkPowerOfTen() {
+        Fraction fraction = Fraction.create(7, 20);
+        List<Integer> primeDivisors = fraction.getPrimeDivisorsOfDenominator();
+
+        assertTrue(fraction.checkPowerOfTen(primeDivisors));
+
+        fraction = Fraction.create(7, 22);
+        primeDivisors = fraction.getPrimeDivisorsOfDenominator();
+
+        assertFalse(fraction.checkPowerOfTen(primeDivisors));
+    }
+
+    @Test
+    void convertToPowerOfTen() {
+        Fraction fraction = Fraction.create(3, 4);
+        List<Integer> primeDivisors = fraction.getPrimeDivisorsOfDenominator();
+        fraction.convertToPowerOfTen(primeDivisors);
+
+        assertEquals(75, fraction.getNumerator());
+        assertEquals(100, fraction.getDenominator());
+    }
 }

@@ -12,5 +12,8 @@ public class FractionApp {
         System.out.println(Prime.getFirst());
         System.out.println(Prime.getNext(2));
         System.out.println(Prime.getNext(5));
+
+        properFraction.convertToDecimal();
+        System.out.println(properFraction);
     }
 }

@@ -1,8 +1,11 @@
 package org.example;
 
+import lombok.ToString;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 public abstract class Fraction implements Comparable<Fraction> {
     protected int numerator;
     protected int denominator;
@@ -93,6 +96,43 @@ public abstract class Fraction implements Comparable<Fraction> {
 
     public Fraction getReciprocal() {
         return create(denominator, numerator);
+    }
+
+    public String convertToDecimal() {
+        List<Integer> primeDivisors = getPrimeDivisorsOfDenominator();
+
+        if (checkPowerOfTen(primeDivisors)) {
+            convertToPowerOfTen(primeDivisors);
+        }
+
+        return "";
+    }
+
+    public void convertToPowerOfTen(List<Integer> primeDivisors) {
+        int countOf2 = 0;
+        int countOf5 = 0;
+
+        for (int prime : primeDivisors) {
+            if (prime == 2) countOf2++;
+            if (prime == 5) countOf5++;
+        }
+
+        int multiplier = (countOf2 < countOf5) ? 2 : 5;
+        int exponent = Math.abs(countOf2 - countOf5);
+
+        for (int i = 0; i < exponent; i++) {
+            numerator *= multiplier;
+            denominator *= multiplier;
+        }
+    }
+
+    public boolean checkPowerOfTen(List<Integer> primeDivisors) {
+
+        for (int prime : primeDivisors) {
+            if (prime != 2 && prime != 5) return false;
+        }
+
+        return true;
     }
 
     public List<Integer> getPrimeDivisorsOfDenominator() {
