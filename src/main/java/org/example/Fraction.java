@@ -99,13 +99,35 @@ public abstract class Fraction implements Comparable<Fraction> {
     }
 
     public String convertToDecimal() {
+        StringBuilder sb = new StringBuilder();
         List<Integer> primeDivisors = getPrimeDivisorsOfDenominator();
 
         if (checkPowerOfTen(primeDivisors)) {
             convertToPowerOfTen(primeDivisors);
+
+            String num = numerator + "";
+            String den = denominator + "";
+
+            int max = Math.max(num.length(), den.length());
+
+            for (int i = max - 1; i >= 0; i--) {
+                sb.append(num.charAt(i));
+
+//                if (num.length() + i < max) {
+//                    sb.append("0");
+//                } else if (num.length() + i == max) {
+//                    sb.append(".");
+//                    sb.append(num.charAt(i - max + num.length()));
+//                } else if (den.length() + i < max) {
+//                    sb.append(num.charAt(i));
+//                } else {
+//                    sb.append(num.charAt(i - max + num.length()));
+//                }
+
+            }
         }
 
-        return "";
+        return sb.reverse().toString();
     }
 
     public void convertToPowerOfTen(List<Integer> primeDivisors) {

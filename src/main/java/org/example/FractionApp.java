@@ -3,7 +3,7 @@ package org.example;
 public class FractionApp {
     public static void main(String[] args) {
 
-        Fraction properFraction = Fraction.create(3, 4);
+        Fraction properFraction = Fraction.create(33, 4);
         Fraction improperFraction = Fraction.create(4, 3);
 
         System.out.println(properFraction instanceof Fraction.ProperFraction);
@@ -15,5 +15,6 @@ public class FractionApp {
 
         properFraction.convertToDecimal();
         System.out.println(properFraction);
+        System.out.println(properFraction.convertToDecimal());
     }
 }
