@@ -1,10 +1,12 @@
 package org.example;
 
+import lombok.Getter;
 import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @ToString
 public abstract class Fraction implements Comparable<Fraction> {
     protected int numerator;
@@ -27,22 +29,6 @@ public abstract class Fraction implements Comparable<Fraction> {
         }
 
         return fraction.simplifying();
-    }
-
-    public int getNumerator() {
-        return numerator;
-    }
-
-    public void setNumerator(int numerator) {
-        this.numerator = numerator;
-    }
-
-    public int getDenominator() {
-        return denominator;
-    }
-
-    public void setDenominator(int denominator) {
-        this.denominator = denominator;
     }
 
     public boolean isProper() {
@@ -108,26 +94,25 @@ public abstract class Fraction implements Comparable<Fraction> {
             String num = numerator + "";
             String den = denominator + "";
 
-            int max = Math.max(num.length(), den.length());
+            int dif = den.length() - num.length();
 
-            for (int i = max - 1; i >= 0; i--) {
-                sb.append(num.charAt(i));
+            if (dif >= 1) {
+                sb.append("0.").repeat("0", dif - 1);
+                for (char ch : num.toCharArray()) {
+                    sb.append(ch);
+                }
+            } else {
+                for (int i = 0; i < num.length(); i++) {
+                    if (den.length() + i - 1 == num.length()) {
+                        sb.append(".");
+                    }
 
-//                if (num.length() + i < max) {
-//                    sb.append("0");
-//                } else if (num.length() + i == max) {
-//                    sb.append(".");
-//                    sb.append(num.charAt(i - max + num.length()));
-//                } else if (den.length() + i < max) {
-//                    sb.append(num.charAt(i));
-//                } else {
-//                    sb.append(num.charAt(i - max + num.length()));
-//                }
-
+                    sb.append(num.charAt(i));
+                }
             }
         }
 
-        return sb.reverse().toString();
+        return sb.toString();
     }
 
     public void convertToPowerOfTen(List<Integer> primeDivisors) {

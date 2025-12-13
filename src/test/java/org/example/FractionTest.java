@@ -25,29 +25,19 @@ class FractionTest {
     }
 
     @Test
-    void getSetNumerator() {
+    void getNumerator() {
         int numerator = 4;
         int denominator = 5;
         Fraction fraction = Fraction.create(numerator, denominator);
-
-        assertEquals(numerator, fraction.getNumerator());
-
-        numerator = 3;
-        fraction.setNumerator(numerator);
 
         assertEquals(numerator, fraction.getNumerator());
     }
 
     @Test
-    void getSetDenominator() {
+    void getDenominator() {
         int numerator = 4;
         int denominator = 5;
         Fraction fraction = Fraction.create(numerator, denominator);
-
-        assertEquals(denominator, fraction.getDenominator());
-
-        denominator = 6;
-        fraction.setDenominator(denominator);
 
         assertEquals(denominator, fraction.getDenominator());
     }
