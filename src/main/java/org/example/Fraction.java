@@ -90,25 +90,58 @@ public abstract class Fraction implements Comparable<Fraction> {
 
         if (checkPowerOfTen(primeDivisors)) {
             convertToPowerOfTen(primeDivisors);
+            sb.append(getDecimalString());
+        } else {
+            sb.append(longDivision());
+        }
 
-            String num = numerator + "";
-            String den = denominator + "";
+        return sb.toString();
+    }
 
-            int dif = den.length() - num.length();
+    public String longDivision() {
+        StringBuilder sb = new StringBuilder();
+        int num = numerator;
+        int den = denominator;
 
-            if (dif >= 1) {
-                sb.append("0.").repeat("0", dif - 1);
-                for (char ch : num.toCharArray()) {
-                    sb.append(ch);
-                }
+        for (int i = 0; i < 5; i++) {
+            int rem = num % den;
+            int div = num / den;
+
+            sb.append(div);
+            if (rem == 0) {
+                break;
             } else {
-                for (int i = 0; i < num.length(); i++) {
-                    if (den.length() + i - 1 == num.length()) {
-                        sb.append(".");
-                    }
+                num *= 10;
 
-                    sb.append(num.charAt(i));
+                if (i == 0) {
+                    sb.append(".");
                 }
+            }
+        }
+
+        return sb.toString();
+    }
+
+    public String getDecimalString() {
+        StringBuilder sb = new StringBuilder();
+
+        String num = numerator + "";
+        String den = denominator + "";
+
+        int dif = den.length() - num.length();
+
+        if (dif >= 1) {
+            sb.append("0.").repeat("0", dif - 1);
+            for (char ch : num.toCharArray()) {
+                sb.append(ch);
+            }
+        } else {
+            for (int i = 0; i < num.length(); i++) {
+                if (den.length() + i - 1 == num.length()) {
+                    sb.append(".");
+                }
+
+                sb.append(num.charAt(i));
             }
         }
 
