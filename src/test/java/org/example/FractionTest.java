@@ -177,4 +177,22 @@ class FractionTest {
         assertEquals(75, fraction.getNumerator());
         assertEquals(100, fraction.getDenominator());
     }
+
+    @Test
+    void getDecimalString() {
+        Fraction fraction = Fraction.create(3, 4);
+        fraction.convertToPowerOfTen(fraction.getPrimeDivisorsOfDenominator());
+
+        assertEquals("0.75", fraction.getDecimalString());
+
+        fraction = Fraction.create(33, 4);
+        fraction.convertToPowerOfTen(fraction.getPrimeDivisorsOfDenominator());
+
+        assertEquals("8.25", fraction.getDecimalString());
+
+        fraction = Fraction.create(3, 64);
+        fraction.convertToPowerOfTen(fraction.getPrimeDivisorsOfDenominator());
+
+        assertEquals("0.046875", fraction.getDecimalString());
+    }
 }
