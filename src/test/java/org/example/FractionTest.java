@@ -195,4 +195,15 @@ class FractionTest {
 
         assertEquals("0.046875", fraction.getDecimalString());
     }
+
+    @Test
+    void longDivision() {
+        Fraction fraction = Fraction.create(1, 3);
+
+        assertEquals("0.333333333", fraction.longDivision());
+
+        fraction = Fraction.create(113, 3);
+
+        assertEquals("37.666666666", fraction.longDivision());
+    }
 }

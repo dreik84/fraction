@@ -103,7 +103,7 @@ public abstract class Fraction implements Comparable<Fraction> {
         int num = numerator;
         int den = denominator;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             int rem = num % den;
             int div = num / den;
 
@@ -111,7 +111,7 @@ public abstract class Fraction implements Comparable<Fraction> {
             if (rem == 0) {
                 break;
             } else {
-                num *= 10;
+                num = rem * 10;
 
                 if (i == 0) {
                     sb.append(".");
