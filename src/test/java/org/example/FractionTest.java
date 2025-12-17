@@ -194,6 +194,7 @@ class FractionTest {
         fraction.convertToPowerOfTen(fraction.getPrimeDivisorsOfDenominator());
 
         assertEquals("0.046875", fraction.getDecimalString());
+
     }
 
     @Test

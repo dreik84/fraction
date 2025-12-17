@@ -92,10 +92,38 @@ public abstract class Fraction implements Comparable<Fraction> {
             convertToPowerOfTen(primeDivisors);
             sb.append(getDecimalString());
         } else {
-            sb.append(longDivision());
+            String decimalFraction = longDivision();
+            System.out.println(checkPeriodic(decimalFraction));
+
+            if (checkPeriodic(decimalFraction)) {
+                sb.append(getPeriodicContinuedFraction(decimalFraction));
+            } else {
+                sb.append(decimalFraction);
+            }
         }
 
         return sb.toString();
+    }
+
+    public boolean checkPeriodic(String decimalFraction) {
+        String fractionalPart = decimalFraction.trim().split("\\.")[1];
+        int len = fractionalPart.length();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (fractionalPart.charAt(i) == fractionalPart.charAt(j)) {
+                    for (int k = i + 1; k < len - j; k++) {
+                        if (fractionalPart.charAt(k) != fractionalPart.charAt(k + j)) return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public String getPeriodicContinuedFraction(String decimalFraction) {
+        return decimalFraction;
     }
 
     public String longDivision() {
