@@ -113,13 +113,14 @@ public abstract class Fraction implements Comparable<Fraction> {
             for (int j = i + 1; j < len; j++) {
                 if (fractionalPart.charAt(i) == fractionalPart.charAt(j)) {
                     for (int k = i + 1; k < len - j; k++) {
-                        if (fractionalPart.charAt(k) != fractionalPart.charAt(k + j)) return false;
+                        if (fractionalPart.charAt(k) != fractionalPart.charAt(k + j)) break;
                     }
+                    return true;
                 }
             }
         }
 
-        return true;
+        return false;
     }
 
     public String getPeriodicContinuedFraction(String decimalFraction) {
@@ -131,7 +132,7 @@ public abstract class Fraction implements Comparable<Fraction> {
         int num = numerator;
         int den = denominator;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             int rem = num % den;
             int div = num / den;
 
