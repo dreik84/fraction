@@ -124,7 +124,32 @@ public abstract class Fraction implements Comparable<Fraction> {
     }
 
     public String getPeriodicContinuedFraction(String decimalFraction) {
-        return decimalFraction;
+        String[] parts = decimalFraction.trim().split("\\.");
+        StringBuilder sb = new StringBuilder(parts[0]).append(".");
+        String fractionalPart = parts[1];
+        int len = fractionalPart.length();
+
+        for (int i = 0; i < len; i++) {
+
+            for (int j = i + 1; j < len; j++) {
+                if (fractionalPart.charAt(i) == fractionalPart.charAt(j)) {
+                    sb.append("(");
+
+                    for (int k = i; k < j - i; k++) {
+                        sb.append(fractionalPart.charAt(k));
+                    }
+                    sb.append(")");
+
+                    System.out.println(decimalFraction);
+
+                    return sb.toString();
+                }
+            }
+
+            sb.append(fractionalPart.charAt(i));
+        }
+
+        return sb.toString();
     }
 
     public String longDivision() {

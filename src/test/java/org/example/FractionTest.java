@@ -199,12 +199,12 @@ class FractionTest {
 
     @Test
     void longDivision() {
-        Fraction fraction = Fraction.create(1, 3);
+        Fraction fraction = Fraction.create(5, 7);
 
-        assertEquals("0.333333333", fraction.longDivision());
+        assertEquals("0.7142857142857142857", fraction.longDivision());
 
         fraction = Fraction.create(113, 3);
 
-        assertEquals("37.666666666", fraction.longDivision());
+        assertEquals("37.6666666666666666666", fraction.longDivision());
     }
 }
