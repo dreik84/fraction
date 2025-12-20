@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @ToString
@@ -95,7 +97,7 @@ public abstract class Fraction implements Comparable<Fraction> {
             String decimalFraction = longDivision();
             System.out.println(checkPeriodic(decimalFraction));
 
-            if (checkPeriodic(decimalFraction)) {
+            if (checkPeriodic(decimalFraction) != null) {
                 sb.append(getPeriodicContinuedFraction(decimalFraction));
             } else {
                 sb.append(decimalFraction);
@@ -105,22 +107,33 @@ public abstract class Fraction implements Comparable<Fraction> {
         return sb.toString();
     }
 
-    public boolean checkPeriodic(String decimalFraction) {
+    public Map<String, Integer> checkPeriodic(String decimalFraction) {
+        Map<String, Integer> result = new HashMap<>();
         String fractionalPart = decimalFraction.trim().split("\\.")[1];
         int len = fractionalPart.length();
 
         for (int i = 0; i < len; i++) {
             for (int j = i + 1; j < len; j++) {
                 if (fractionalPart.charAt(i) == fractionalPart.charAt(j)) {
-                    for (int k = i + 1; k < len - j; k++) {
-                        if (fractionalPart.charAt(k) != fractionalPart.charAt(k + j)) break;
+                    boolean found = true;
+
+                    for (int k = 0; k < j - i; k++) {
+                        if (fractionalPart.charAt(i + k + 1) != fractionalPart.charAt(j + k + 1)) {
+                            found = false;
+                            break;
+                        }
                     }
-                    return true;
+
+                    if (found) return Map.of("start", i, "end", j);
+
+//                    result.put("start", i); // start include
+//                    result.put("end", j);   // end exclude
+//                    return result;
                 }
             }
         }
 
-        return false;
+        return null;
     }
 
     public String getPeriodicContinuedFraction(String decimalFraction) {
