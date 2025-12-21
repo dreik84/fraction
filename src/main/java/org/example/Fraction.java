@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -95,10 +94,12 @@ public abstract class Fraction implements Comparable<Fraction> {
             sb.append(getDecimalString());
         } else {
             String decimalFraction = longDivision();
-            System.out.println(checkPeriodic(decimalFraction));
+            Map<String, Integer> boundaries = checkPeriodic(decimalFraction);
 
-            if (checkPeriodic(decimalFraction) != null) {
-                sb.append(getPeriodicContinuedFraction(decimalFraction));
+            System.out.println(boundaries);
+
+            if (boundaries != null) {
+                sb.append(getPeriodicContinuedFraction(decimalFraction, boundaries));
             } else {
                 sb.append(decimalFraction);
             }
@@ -108,7 +109,6 @@ public abstract class Fraction implements Comparable<Fraction> {
     }
 
     public Map<String, Integer> checkPeriodic(String decimalFraction) {
-        Map<String, Integer> result = new HashMap<>();
         String fractionalPart = decimalFraction.trim().split("\\.")[1];
         int len = fractionalPart.length();
 
@@ -117,18 +117,14 @@ public abstract class Fraction implements Comparable<Fraction> {
                 if (fractionalPart.charAt(i) == fractionalPart.charAt(j)) {
                     boolean found = true;
 
-                    for (int k = 0; k < j - i; k++) {
-                        if (fractionalPart.charAt(i + k + 1) != fractionalPart.charAt(j + k + 1)) {
+                    for (int k = 1; k < len - j; k++) {
+                        if (fractionalPart.charAt(i + k) != fractionalPart.charAt(j + k)) {
                             found = false;
                             break;
                         }
                     }
 
                     if (found) return Map.of("start", i, "end", j);
-
-//                    result.put("start", i); // start include
-//                    result.put("end", j);   // end exclude
-//                    return result;
                 }
             }
         }
@@ -136,31 +132,19 @@ public abstract class Fraction implements Comparable<Fraction> {
         return null;
     }
 
-    public String getPeriodicContinuedFraction(String decimalFraction) {
+    public String getPeriodicContinuedFraction(String decimalFraction, Map<String, Integer> boundaries) {
         String[] parts = decimalFraction.trim().split("\\.");
         StringBuilder sb = new StringBuilder(parts[0]).append(".");
         String fractionalPart = parts[1];
-        int len = fractionalPart.length();
 
-        for (int i = 0; i < len; i++) {
-
-            for (int j = i + 1; j < len; j++) {
-                if (fractionalPart.charAt(i) == fractionalPart.charAt(j)) {
-                    sb.append("(");
-
-                    for (int k = i; k < j - i; k++) {
-                        sb.append(fractionalPart.charAt(k));
-                    }
-                    sb.append(")");
-
-                    System.out.println(decimalFraction);
-
-                    return sb.toString();
-                }
-            }
-
+        for (int i = 0; i < boundaries.get("end"); i++) {
+            if (i == boundaries.get("start")) sb.append("(");
             sb.append(fractionalPart.charAt(i));
         }
+
+        System.out.println(decimalFraction);
+
+        sb.append(")");
 
         return sb.toString();
     }
