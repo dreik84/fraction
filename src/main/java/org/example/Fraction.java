@@ -81,6 +81,32 @@ public abstract class Fraction implements Comparable<Fraction> {
         return multiplication(reciprocal);
     }
 
+    public Fraction exponentiation(int exponent) {
+        int resNumerator = numerator;
+        int resDenominator = denominator;
+
+        if (exponent < 0) {
+            resNumerator = denominator;
+            resDenominator = numerator;
+            exponent = -exponent;
+        }
+
+        resNumerator = power(resNumerator, exponent);
+        resDenominator = power(resDenominator, exponent);
+
+        return Fraction.create(resNumerator, resDenominator);
+    }
+
+    public int power(int base, int exponent) {
+        int res = 1;
+
+        for (int i = 1; i <= exponent; i++) {
+            res *= base;
+        }
+
+        return res;
+    }
+
     public Fraction getReciprocal() {
         return create(denominator, numerator);
     }

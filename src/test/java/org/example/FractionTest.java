@@ -207,4 +207,33 @@ class FractionTest {
 
         assertEquals("37.6666666666666666666", fraction.longDivision());
     }
+
+    @Test
+    void power() {
+        Fraction fraction = Fraction.create(3, 4);
+
+        assertEquals(1, fraction.power(2, 0));
+        assertEquals(2, fraction.power(2, 1));
+        assertEquals(4, fraction.power(2, 2));
+        assertEquals(8, fraction.power(2, 3));
+    }
+
+    @Test
+    void exponentiation() {
+        Fraction fraction = Fraction.create(3, 4);
+        Fraction powerFraction = fraction.exponentiation(2);
+
+        assertEquals(9, powerFraction.getNumerator());
+        assertEquals(16, powerFraction.getDenominator());
+
+        powerFraction = fraction.exponentiation(-2);
+
+        assertEquals(16, powerFraction.getNumerator());
+        assertEquals(9, powerFraction.getDenominator());
+
+        powerFraction = fraction.exponentiation(0);
+
+        assertEquals(1, powerFraction.getNumerator());
+        assertEquals(1, powerFraction.getDenominator());
+    }
 }
