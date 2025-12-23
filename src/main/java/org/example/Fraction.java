@@ -101,10 +101,22 @@ public abstract class Fraction implements Comparable<Fraction> {
         int res = 1;
 
         for (int i = 1; i <= exponent; i++) {
-            res *= base;
+            res = multiply(res, base);
         }
 
         return res;
+    }
+
+    public int multiply(int a, int b) {
+        int result = 0;
+        int len = Math.min(a, b);
+        int multiplier = Math.max(a, b);
+
+        for (int i = 0; i < len; i++) {
+            result += multiplier;
+        }
+
+        return result;
     }
 
     public Fraction getReciprocal() {
