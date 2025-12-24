@@ -219,6 +219,15 @@ class FractionTest {
     }
 
     @Test
+    void multiply() {
+        Fraction fraction = Fraction.create(3, 4);
+
+        assertEquals(0, fraction.multiply(1, 0));
+        assertEquals(1, fraction.multiply(1, 1));
+        assertEquals(6, fraction.multiply(3, 2));
+    }
+
+    @Test
     void exponentiation() {
         Fraction fraction = Fraction.create(3, 4);
         Fraction powerFraction = fraction.exponentiation(2);
